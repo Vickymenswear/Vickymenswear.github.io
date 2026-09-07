@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vicky Mans Wear | Admin Panel</title>
+<style>
+:root{--green:#0f3d35;--gold:#c59b5b;--cream:#f7f1e8;--ink:#111827;--muted:#687076}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--cream);color:var(--ink)}
+.wrap{width:min(1100px,94%);margin:30px auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+h1{margin:0;color:var(--green)}.card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 10px 35px #00000010;margin-bottom:18px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #d9d3ca;border-radius:10px;margin-top:6px;font:inherit}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer;background:var(--green);color:#fff}.btn.gold{background:var(--gold)}.btn.red{background:#a63d3d}.btn.gray{background:#e9e4dc;color:var(--ink)}
+.hidden{display:none}.login{max-width:430px;margin:80px auto}.msg{padding:10px;border-radius:10px;margin:10px 0;background:#f1ece4;font-size:13px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:top}td img{width:65px;height:65px;object-fit:cover;border-radius:8px}
+.checks{display:flex;gap:12px;flex-wrap:wrap}.checks label{font-weight:600;margin:0}.checks input{width:auto}
+.small{font-size:12px;color:var(--muted);line-height:1.5}
+@media(max-width:650px){.row{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}table{display:block;overflow:auto}}
+</style>
+</head>
+<body>
+<div id="login" class="login card">
+<h1>Admin Login</h1>
+<p class="small">Vicky Mans Wear — Product & Shop Management</p>
+<div id="loginMsg"></div>
+<label>Username<input id="user" autocomplete="username"></label>
+<label>Password<input id="pass" type="password" autocomplete="current-password"></label>
+<button class="btn" onclick="login()">Login</button>
+</div>
+
+<div id="panel" class="wrap hidden">
+<div class="top">
+  <div><h1>Admin Panel</h1><div class="small">Products, prices, sizes और basic website settings manage करें.</div></div>
+  <div><button class="btn gray" onclick="window.location='index.html'">View Website</button> <button class="btn red" onclick="logout()">Logout</button></div>
+</div>
+
+<div class="card">
+<h2>➕ Add / Edit Product</h2>
+<input type="hidden" id="pid">
+<div class="row">
+<label>Product Name<input id="pname" placeholder="जैसे Premium Shirt"></label>
+<label>Price (₹)<input id="price" type="number" min="0" placeholder="1499"></label>
+</div>
+<div class="row">
+<label>Category<select id="cat"><option value="formal">Formal</option><option value="casual">Casual</option><option value="street">Street</option></select></label>
+<label>Badge<input id="badge" placeholder="NEW / TRENDING / FEATURED"></label>
+</div>
+<label>Product Details<textarea id="details" rows="3" placeholder="Colour, fabric, style आदि"></textarea></label>
+<label>Sizes</label>
+<div class="checks">
+<label><input type="checkbox" value="S" class="sz"> S</label>
+<label><input type="checkbox" value="M" class="sz"> M</label>
+<label><input type="checkbox" value="L" class="sz"> L</label>
+<label><input type="checkbox" value="XL" class="sz"> XL</label>
+<label><input type="checkbox" value="XXL" class="sz"> XXL</label>
+</div>
+<label>Image file name (image को website के <b>images</b> folder में रखें)<input id="image" placeholder="images/my-shirt.jpg"></label>
+<div class="small">नया photo जोड़ने के लिए photo को ZIP के <b>images</b> folder में डालकर उसका path यहाँ लिखें.</div>
+<br>
+<button class="btn" onclick="saveProduct()">Save Product</button>
+<button class="btn gold" onclick="resetForm()">Clear</button>
+<div id="saveMsg"></div>
+</div>
+
+<div class="card">
+<h2>🛍️ Products</h2>
+<div id="productsTable"></div>
+</div>
+
+<div class="card">
+<h2>⚙️ Shop Settings</h2>
+<div class="row">
+<label>Shop Name<input id="shopName" value="Vicky Mans Wear"></label>
+<label>Location<input id="shopLocation" value="Ghughri"></label>
+</div>
+<div class="row">
+<label>Phone<input id="shopPhone" value="8815033967"></label>
+<label>WhatsApp<input id="shopWhatsApp" value="8815033967"></label>
+</div>
+<button class="btn" onclick="saveSettings()">Save Settings</button>
+<div id="settingsMsg"></div>
+</div>
+
+<div class="card">
+<h2>💾 Backup & Reset</h2>
+<p class="small">Browser में products/settings save होते हैं। Reset करने से demo products वापस आ जाएंगे.</p>
+<button class="btn gray" onclick="exportData()">Export Backup</button>
+<button class="btn red" onclick="resetAll()">Reset Products</button>
+</div>
+</div>
+
+<script>
+const defaults = [
+ {id:1,cat:"formal",badge:"FEATURED",name:"Grey Shirt + Black Trouser Set",details:"Clean formal look • Full-sleeve shirt • Black trousers",price:1499,sizes:["S","M","L","XL","XXL"],image:"images/formal-grey-black.jpg"},
+ {id:2,cat:"formal",badge:"SMART LOOK",name:"Navy Shirt + White Trouser Set",details:"Smart casual/formal • Navy overshirt • White trousers",price:1299,sizes:["S","M","L","XL","XXL"],image:"images/navy-white.jpg"},
+ {id:3,cat:"street",badge:"TRENDING",name:"Black Graphic Sweatshirt + Pant",details:"Streetwear style • Graphic sweatshirt • Matching black pant",price:999,sizes:["S","M","L","XL","XXL"],image:"images/street-black.jpg"}
+];
+function products(){try{return JSON.parse(localStorage.getItem('vickyProducts'))||defaults}catch(e){return defaults}}
+function saveProducts(p){localStorage.setItem('vickyProducts',JSON.stringify(p))}
+function login(){
+ const u=document.getElementById('user').value,p=document.getElementById('pass').value;
+ if(u==='deva'&&p==='123123'){sessionStorage.setItem('vickyAdmin','1');showPanel()}
+ else document.getElementById('loginMsg').innerHTML='<div class="msg">Username या password गलत है.</div>';
+}
+function showPanel(){document.getElementById('login').classList.add('hidden');document.getElementById('panel').classList.remove('hidden');render()}
+function logout(){sessionStorage.removeItem('vickyAdmin');location.reload()}
+function render(){
+ const ps=products();
+ document.getElementById('productsTable').innerHTML=ps.length?`<table><tr><th>Photo</th><th>Product</th><th>Price</th><th>Sizes</th><th>Action</th></tr>`+
+ ps.map(p=>`<tr><td><img src="${p.image}" onerror="this.style.display='none'"></td><td><b>${esc(p.name)}</b><br>${esc(p.details||'')}</td><td>₹${Number(p.price).toLocaleString('en-IN')}</td><td>${(p.sizes||[]).join(', ')}</td><td><button class="btn gold" onclick="editProduct(${p.id})">Edit</button> <button class="btn red" onclick="deleteProduct(${p.id})">Delete</button></td></tr>`).join('')+'</table>':'No products';
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function saveProduct(){
+ const name=document.getElementById('pname').value.trim(), price=Number(document.getElementById('price').value);
+ if(!name||!price){document.getElementById('saveMsg').innerHTML='<div class="msg">Product name और price भरें.</div>';return}
+ const sizes=[...document.querySelectorAll('.sz:checked')].map(x=>x.value);
+ const data={id:Number(document.getElementById('pid').value)||Date.now(),name,price,cat:document.getElementById('cat').value,badge:document.getElementById('badge').value||'NEW',details:document.getElementById('details').value,image:document.getElementById('image').value||'images/formal-grey-black.jpg',sizes};
+ let ps=products(),i=ps.findIndex(x=>x.id===data.id); if(i>=0)ps[i]=data;else ps.push(data); saveProducts(ps); resetForm(); render();
+ document.getElementById('saveMsg').innerHTML='<div class="msg">Product save हो गया.</div>';
+}
+function editProduct(id){
+ const p=products().find(x=>x.id===id);if(!p)return;
+ document.getElementById('pid').value=p.id;document.getElementById('pname').value=p.name;document.getElementById('price').value=p.price;document.getElementById('cat').value=p.cat;document.getElementById('badge').value=p.badge||'';document.getElementById('details').value=p.details||'';document.getElementById('image').value=p.image||'';
+ document.querySelectorAll('.sz').forEach(x=>x.checked=(p.sizes||[]).includes(x.value));window.scrollTo({top:0,behavior:'smooth'});
+}
+function deleteProduct(id){if(confirm('यह product delete करें?')){saveProducts(products().filter(p=>p.id!==id));render()}}
+function resetForm(){document.getElementById('pid').value='';['pname','price','badge','details','image'].forEach(id=>document.getElementById(id).value='');document.getElementById('cat').value='formal';document.querySelectorAll('.sz').forEach(x=>x.checked=false)}
+function saveSettings(){
+ const s={name:shopName.value,location:shopLocation.value,phone:shopPhone.value,whatsapp:shopWhatsApp.value};localStorage.setItem('vickySettings',JSON.stringify(s));document.getElementById('settingsMsg').innerHTML='<div class="msg">Settings save हो गईं.</div>';
+}
+function exportData(){
+ const data={products:products(),settings:JSON.parse(localStorage.getItem('vickySettings')||'{}')};
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='vicky-mans-wear-backup.json';a.click();
+}
+function resetAll(){if(confirm('सभी added products हटाकर default products वापस करें?')){saveProducts(defaults);render()}}
+if(sessionStorage.getItem('vickyAdmin')==='1')showPanel();
+</script>
+</body>
+</html>

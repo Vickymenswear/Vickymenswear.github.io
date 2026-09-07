@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vicky Mans Wear - Ghughri | Men's Fashion & Clothing">
+<title>Vicky Mans Wear | Ghughri</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+:root{
+  --ink:#111827; --cream:#f7f1e8; --gold:#c59b5b; --gold2:#e0bb7c;
+  --green:#0f3d35; --green2:#165c4f; --white:#fff; --muted:#687076;
+  --shadow:0 18px 50px rgba(15,61,53,.12);
+}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:var(--cream)}
+a{text-decoration:none;color:inherit}
+.container{width:min(1160px,92%);margin:auto}
+.topbar{background:var(--green);color:#fff;padding:9px 0;text-align:center;font-size:13px;letter-spacing:.3px}
+nav{position:sticky;top:0;z-index:20;background:rgba(247,241,232,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(15,61,53,.09)}
+.navin{display:flex;align-items:center;justify-content:space-between;min-height:72px}
+.logo{font-weight:800;letter-spacing:.5px;font-size:20px}
+.logo span{color:var(--gold)}
+.navlinks{display:flex;gap:26px;font-size:14px;font-weight:600}
+.navlinks a:hover{color:var(--green2)}
+.hero{padding:72px 0 55px;background:
+ radial-gradient(circle at 90% 20%,rgba(197,155,91,.20),transparent 28%),
+ linear-gradient(135deg,#f7f1e8 0%,#efe5d4 100%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+.kicker{color:var(--green2);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+h1{font-family:"Playfair Display",serif;font-size:clamp(44px,7vw,78px);line-height:.98;margin:14px 0 20px}
+.hero p{font-size:17px;line-height:1.7;color:#4f585e;max-width:590px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border-radius:12px;font-weight:800;font-size:14px;border:1px solid var(--green)}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{background:var(--green2)}
+.btn.light{background:#fff;color:var(--green)}
+.hero-card{background:var(--green);border-radius:28px;padding:24px;box-shadow:var(--shadow);color:#fff;transform:rotate(1.2deg)}
+.hero-card img{width:100%;height:370px;object-fit:cover;border-radius:18px;display:block}
+.hero-note{padding:14px 4px 0;font-size:13px;opacity:.85}
+.section{padding:70px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:28px}
+.section h2{font-family:"Playfair Display",serif;font-size:40px;margin:8px 0}
+.section-sub{color:var(--muted);max-width:650px;line-height:1.6}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{border:1px solid #d6c9b6;background:#fff;padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:700;font-size:12px}
+.filter.active{background:var(--green);color:#fff;border-color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 10px 30px rgba(17,24,39,.07);border:1px solid rgba(17,24,39,.06);display:flex;flex-direction:column}
+.pic{position:relative;background:#ddd}
+.pic img{width:100%;height:390px;object-fit:cover;display:block}
+.badge{position:absolute;top:14px;left:14px;background:var(--gold);color:#fff;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.cardbody{padding:18px}
+.card h3{margin:0 0 8px;font-size:18px}
+.meta{font-size:13px;color:var(--muted);line-height:1.7}
+.sizes{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}
+.size{background:#f4efe7;border:1px solid #ded2c1;border-radius:8px;padding:7px 10px;font-size:11px;font-weight:800}
+.wa{margin-top:auto;display:flex;width:100%;background:#198754;color:#fff;padding:12px 14px;border-radius:11px;justify-content:center;font-weight:800;font-size:13px}
+.wa:hover{filter:brightness(.94)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.feature{background:var(--green);color:#fff;border-radius:18px;padding:22px}
+.feature b{display:block;margin:9px 0 6px}
+.feature span{font-size:12px;line-height:1.5;opacity:.8}
+.about{background:#fff}
+.aboutgrid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.aboutbox{background:var(--green);color:#fff;border-radius:28px;padding:35px}
+.aboutbox h3{font-family:"Playfair Display",serif;font-size:32px;margin-top:0}
+.info{display:grid;gap:14px;margin-top:20px}
+.info div{padding:14px 16px;border:1px solid #e4ded4;border-radius:12px;background:#faf8f4}
+.contact{background:linear-gradient(135deg,var(--green),#082c26);color:#fff}
+.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.contact p{color:#d7e0dd;line-height:1.7}
+.contactcard{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px}
+.contactrow{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14px}
+.contactrow:last-child{border:0}
+footer{background:#071f1b;color:#c8d5d1;padding:25px 0;font-size:12px;text-align:center}
+.fab{position:fixed;right:18px;bottom:18px;z-index:30;background:#198754;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:24px;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+@media(max-width:850px){
+ .hero-grid,.aboutgrid,.contactgrid{grid-template-columns:1fr}
+ .grid{grid-template-columns:1fr 1fr}
+ .features{grid-template-columns:1fr 1fr}
+ .hero-card{max-width:520px;margin:auto}
+}
+@media(max-width:560px){
+ .navlinks{display:none}
+ .hero{padding-top:45px}
+ .grid{grid-template-columns:1fr}
+ .features{grid-template-columns:1fr}
+ .pic img{height:430px}
+ .section{padding:52px 0}
+}
+</style>
+</head>
+<body>
+<div class="topbar">✨ नई फैशन कलेक्शन • Ghughri • WhatsApp पर ऑर्डर/जानकारी</div>
+
+<nav>
+  <div class="container navin">
+    <a class="logo" href="#home">VICKY <span>MANS WEAR</span></a>
+    <div class="navlinks">
+      <a href="#collection">Collection</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="admin.html">Admin</a>
+    </div>
+    <a class="btn primary" href="https://wa.me/918815033967?text=Hello%20Vicky%20Mans%20Wear%2C%20mujhe%20collection%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank">WhatsApp</a>
+  </div>
+</nav>
+
+<main id="home">
+<section class="hero">
+ <div class="container hero-grid">
+  <div>
+   <div class="kicker">Men's Fashion • Ghughri</div>
+   <h1>Style जो<br><em>आपकी पहचान</em> बने.</h1>
+   <p>Vicky Mans Wear पर men's shirts, trousers और stylish casual wear की चुनिंदा collection. अपना पसंदीदा piece देखें और सीधे WhatsApp पर size/price पूछें।</p>
+   <div class="btns">
+    <a class="btn primary" href="#collection">Collection देखें</a>
+    <a class="btn light" href="tel:8815033967">📞 Call Now</a>
+   </div>
+  </div>
+  <div class="hero-card">
+    <img src="images/formal-grey-black.jpg" alt="Vicky Mans Wear men's outfit">
+    <div class="hero-note">Premium looks • Easy WhatsApp enquiry • Ghughri</div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="collection">
+ <div class="container">
+  <div class="section-head">
+   <div>
+    <div class="kicker">Our Collection</div>
+    <h2>Featured Pieces</h2>
+    <div class="section-sub">हर product के नीचे direct WhatsApp button है। Size और price की जानकारी के लिए एक tap में message भेजें।</div>
+   </div>
+   <div class="filters">
+    <button class="filter active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter" onclick="filterProducts('formal',this)">Formal</button>
+    <button class="filter" onclick="filterProducts('casual',this)">Casual</button>
+    <button class="filter" onclick="filterProducts('street',this)">Street</button>
+   </div>
+  </div>
+
+  <div class="grid" id="productGrid"></div></div>
+ </div>
+</section>
+
+<section class="section" id="features">
+ <div class="container">
+  <div class="kicker">Why Vicky Mans Wear</div>
+  <h2>Simple shopping, better style.</h2>
+  <div class="features">
+   <div class="feature"><div style="font-size:25px">👕</div><b>Fresh Collection</b><span>Men's fashion के नए और stylish looks.</span></div>
+   <div class="feature"><div style="font-size:25px">📏</div><b>Multiple Sizes</b><span>S से XXL तक size options दिखाए गए हैं; actual availability WhatsApp पर confirm करें.</span></div>
+   <div class="feature"><div style="font-size:25px">💬</div><b>Direct WhatsApp</b><span>हर product से सीधे shop पर enquiry भेजें.</span></div>
+   <div class="feature"><div style="font-size:25px">📍</div><b>Local Shop</b><span>Ghughri में offline shopping के लिए संपर्क करें.</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="section about" id="about">
+ <div class="container aboutgrid">
+  <div>
+   <div class="kicker">About the Shop</div>
+   <h2>Vicky Mans Wear</h2>
+   <p class="section-sub">आपके men's fashion के लिए एक simple और stylish destination. Online collection देखकर सीधे WhatsApp या call के जरिए कपड़ों की price, size और availability पूछ सकते हैं.</p>
+   <div class="info">
+    <div>📍 <b>Location:</b> Ghughri</div>
+    <div>📞 <b>Phone:</b> <a href="tel:8815033967">8815033967</a></div>
+    <div>💬 <b>WhatsApp:</b> <a href="https://wa.me/918815033967" target="_blank">8815033967</a></div>
+   </div>
+  </div>
+  <div class="aboutbox">
+   <h3>आपका अगला favourite outfit यहीं हो सकता है.</h3>
+   <p>Collection पसंद आए तो WhatsApp पर product का नाम और अपना size भेजें। Shop से price और availability confirm कर लें.</p>
+   <a class="btn" style="background:#fff;color:var(--green);border-color:#fff;margin-top:8px" href="https://wa.me/918815033967?text=Hello%20Vicky%20Mans%20Wear%2C%20mujhe%20aapki%20latest%20men%27s%20collection%20dekhni%20hai." target="_blank">Latest Collection पूछें</a>
+  </div>
+ </div>
+</section>
+
+<section class="section contact" id="contact">
+ <div class="container contactgrid">
+  <div>
+   <div class="kicker" style="color:var(--gold2)">Contact</div>
+   <h2 style="color:#fff">Shop से जुड़ें.</h2>
+   <p>Product की price, size, stock या नई collection के लिए हमें WhatsApp करें या सीधे call करें.</p>
+   <div class="btns">
+    <a class="btn" style="background:#198754;color:#fff;border-color:#198754" href="https://wa.me/918815033967" target="_blank">💬 WhatsApp</a>
+    <a class="btn" style="background:#fff;color:var(--green);border-color:#fff" href="tel:8815033967">📞 8815033967</a>
+   </div>
+  </div>
+  <div class="contactcard">
+   <div class="contactrow"><span>Shop Name</span><b>Vicky Mans Wear</b></div>
+   <div class="contactrow"><span>Location</span><b>Ghughri</b></div>
+   <div class="contactrow"><span>Phone</span><b>8815033967</b></div>
+   <div class="contactrow"><span>WhatsApp</span><b>8815033967</b></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<a class="fab" href="https://wa.me/918815033967?text=Hello%20Vicky%20Mans%20Wear%2C%20mujhe%20aapki%20collection%20ke%20baare%20mein%20jaankari%20chahiye." target="_blank" aria-label="WhatsApp">💬</a>
+<footer>© <span id="year"></span> Vicky Mans Wear • Ghughri • All Rights Reserved</footer>
+
+<script>
+const defaultProducts = [
+ {id:1,cat:"formal",badge:"FEATURED",name:"Grey Shirt + Black Trouser Set",details:"Clean formal look • Full-sleeve shirt • Black trousers",price:1499,sizes:["S","M","L","XL","XXL"],image:"images/formal-grey-black.jpg"},
+ {id:2,cat:"formal",badge:"SMART LOOK",name:"Navy Shirt + White Trouser Set",details:"Smart casual/formal • Navy overshirt • White trousers",price:1299,sizes:["S","M","L","XL","XXL"],image:"images/navy-white.jpg"},
+ {id:3,cat:"street",badge:"TRENDING",name:"Black Graphic Sweatshirt + Pant",details:"Streetwear style • Graphic sweatshirt • Matching black pant",price:999,sizes:["S","M","L","XL","XXL"],image:"images/street-black.jpg"}
+];
+
+function getProducts(){
+  const saved = localStorage.getItem('vickyProducts');
+  if(!saved){ localStorage.setItem('vickyProducts', JSON.stringify(defaultProducts)); return defaultProducts; }
+  try { return JSON.parse(saved); } catch(e){ return defaultProducts; }
+}
+function renderProducts(cat='all'){
+  const products=getProducts();
+  const grid=document.getElementById('productGrid');
+  grid.innerHTML='';
+  products.filter(p=>cat==='all'||p.cat===cat||((p.cat||'').includes(cat))).forEach(p=>{
+    const sizes=(p.sizes||[]).map(s=>`<span class="size">${s}</span>`).join('');
+    const msg=encodeURIComponent(`Hello Vicky Mans Wear, mujhe ${p.name} chahiye. Mera size: ____. Iski price ₹${Number(p.price).toLocaleString('en-IN')} hai. Availability batayein.`);
+    grid.insertAdjacentHTML('beforeend', `
+      <article class="card" data-cat="${p.cat}">
+        <div class="pic"><span class="badge">${p.badge||'NEW'}</span><img src="${p.image}" alt="${p.name}"></div>
+        <div class="cardbody">
+          <h3>${p.name}</h3>
+          <div class="meta">${p.details||''}<br>Price: <b>₹${Number(p.price).toLocaleString('en-IN')}</b></div>
+          <div class="sizes">${sizes}</div>
+          <a class="wa" href="https://wa.me/918815033967?text=${msg}" target="_blank">💬 WhatsApp पर इस कपड़े की जानकारी लें</a>
+        </div>
+      </article>`);
+  });
+}
+function filterProducts(cat, btn){
+ document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));
+ btn.classList.add('active');
+ renderProducts(cat);
+}
+renderProducts();
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
